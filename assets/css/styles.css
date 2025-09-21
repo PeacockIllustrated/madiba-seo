@@ -1,0 +1,70 @@
+
+/* Madiba SEO Theme – minimal, fast, accessible */
+:root{
+  --navy:#0a2a3f; --navy-2:#0e3753; --blue:#1d80b9; --green:#60c659; --ink:#0b1321; --muted:#6b7a90;
+  --bg:#f6f8fb; --card:#ffffff; --radius:14px; --shadow:0 10px 30px rgba(6,24,44,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,Noto Sans;color:var(--ink);background:var(--bg);}
+img{max-width:100%;height:auto}
+a{color:var(--blue);text-decoration:none} a:hover,a:focus{text-decoration:underline}
+.container{width:min(1200px,92vw);margin-inline:auto}
+/* Header */
+header{background:linear-gradient(120deg,var(--navy) 0%, var(--navy-2) 60%);color:#fff;position:sticky;top:0;z-index:10;box-shadow:var(--shadow)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 0}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:#cfe8f6;font-weight:600} .cta{background:var(--green);color:#072e19!important;padding:.55rem 1rem;border-radius:999px}
+/* Hero */
+.hero{background:linear-gradient(90deg,rgba(10,42,63,1) 0%,rgba(10,42,63,.85) 55%,rgba(10,42,63,.75) 100%);color:#fff}
+.hero-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;padding:64px 0;align-items:center}
+.kicker{letter-spacing:.12em;text-transform:uppercase;color:#bde0ff;font-weight:700;font-size:.85rem}
+h1{font-size:clamp(28px,3.2vw,44px);line-height:1.15;margin:.25rem 0 1rem}
+.lead{font-size:clamp(16px,1.6vw,19px);color:#d9ecfb;max-width:58ch}
+.actions{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.1rem;border-radius:10px;font-weight:700;border:2px solid transparent}
+.btn.primary{background:var(--green);color:#072e19}
+.btn.secondary{background:transparent;border-color:#7fc3ea;color:#d9ecfb}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.pill{background:#08334d;color:#a8d4ef;padding:.35rem .7rem;border-radius:999px;font-size:.82rem}
+/* Sections */
+.section{padding:56px 0}
+h2{font-size:clamp(22px,2.4vw,32px);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.service{grid-column:span 6;display:flex;flex-direction:column;gap:10px}
+.service h3{margin:.2rem 0;font-size:1.1rem}
+.service p{color:var(--muted)}
+.service .cta-link{margin-top:auto}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.list li::before{content:"▸ ";color:var(--blue)}
+.logos{background:#0e3753}
+.logo-row{display:flex;gap:26px;align-items:center;justify-content:center;flex-wrap:wrap;padding:18px}
+.logo-row img{filter:brightness(0) invert(1);opacity:.85;height:28px}
+/* Posts */
+.post{grid-column:span 6}
+.post h3{margin:.2rem 0}
+.post p{color:var(--muted)}
+/* CTA */
+.cta-bar{background:var(--green);color:#072e19;border-radius:var(--radius);padding:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* Footer */
+footer{background:#071b2a;color:#bcd1e2;padding:42px 0;margin-top:48px}
+footer a{color:#d9ecfb}
+.foot-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.foot-col{grid-column:span 4}
+.copyright{margin-top:22px;font-size:.9rem;color:#93a7ba}
+/* Breadcrumbs */
+.breadcrumbs{font-size:.9rem;color:#5d6f86;margin:10px 0 20px}
+.breadcrumbs a{color:#5d8fb1}
+/* Interactions/animations */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.card:hover{transform:translateY(-2px);transition:transform .2s ease}
+/* Accordion */
+.accordion{border-radius:var(--radius);overflow:hidden;border:1px solid #e1e7f0;background:#fff}
+.accordion details{border-top:1px solid #eef2f7;padding:14px 18px}
+.accordion details[open]{background:#fbfdff}
+.accordion summary{cursor:pointer;font-weight:700}
+/* Responsive */
+@media (max-width:960px){
+  .hero-inner{grid-template-columns:1fr}
+  .service,.post,.foot-col{grid-column:span 12}
+}
