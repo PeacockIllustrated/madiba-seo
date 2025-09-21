@@ -1,49 +1,24 @@
 
-# Madiba – SEO Overhaul Static Site (Deploy to Netlify)
+# Madiba – SEO Overhaul Static Site v2 (Deploy to Netlify)
 
-A fast, accessible, SEO‑optimised static site that mirrors Madiba’s brand and information architecture with improved copy, schema and interactivity.
+A fast, accessible, SEO‑optimised static site with **advanced micro‑interactions**: magnetic buttons + ripple, 3D tilt cards, scroll progress bar, animated hero orbs, readiness progress, and a back‑to‑top FAB. All guarded by `prefers-reduced-motion` for accessibility.
 
 ## Highlights
-- Semantic HTML with clean H1/H2 hierarchy and descriptive anchors.
-- JSON‑LD: Organization, WebSite (with SearchAction), FAQPage, BreadcrumbList.
-- Interactive components: reveal-on-scroll, animated proof counters, Readiness self‑assessment.
-- Netlify-ready contact form (`data-netlify="true"`), sitemap & robots.
-- System fonts only (fast); compressed inline SVGs as placeholders.
-- Brand tokens: navy `#0a2a3f`, blue `#1d80b9`, green `#60c659`.
+- Semantic HTML with strong H1/H2 hierarchy; descriptive anchors.
+- JSON‑LD: Organization, WebSite+SearchAction, FAQPage, BreadcrumbList.
+- **Micro‑interactions**: reveal-on-scroll, magnetic buttons, ripple on click, tilt cards, progress bar, FAB, readiness progressline.
+- Netlify-ready contact form; sitemap & robots; OpenGraph/Twitter cards.
+- Brand-consistent: navy `#0a2a3f`, blue `#1d80b9`, green `#60c659`.
 
 ## Structure
-```
-/
-  index.html
-  robots.txt
-  sitemap.xml
-  netlify.toml
-  /assets
-    /css/styles.css
-    /js/main.js
-    /img/logo.svg
-  /services
-    s4hana.html
-    rise-grow.html
-    analytics.html
-    btp.html
-    managed.html
-  /solutions
-    active.html
-    snap.html
-    finex.html
-  /insights/index.html
-  /about/index.html
-  /contact/index.html
-```
+(identical to v1; see file tree)
 
 ## Deploy
 1. Push this folder to GitHub.
-2. In Netlify → **New site from Git**, select the repo.
-3. Build command: *(empty)*, Publish directory: `/`.
-4. Add custom domain and enable HTTPS.
+2. Netlify → New site from Git → select repo.
+3. Build command: (empty), Publish directory: `/`.
+4. Add domain + HTTPS.
 
-## Next steps
-- Replace SVG placeholders with real logos, images and case study graphics.
-- Wire the Readiness Tool to a backend if desired.
-- Add more Insights articles and link them back to services using exact‑match anchors.
+## Notes
+- Interactions are **SEO-safe** (no content hidden from crawlers, performance-light, motion respects `prefers-reduced-motion`).
+- Replace SVG placeholders with real assets before go-live.
