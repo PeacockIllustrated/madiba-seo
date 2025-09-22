@@ -1,4 +1,4 @@
-/* Madiba SEO Theme – v2 visuals + interactions + FORM STYLES */
+/* Madiba SEO Theme – v2 visuals + interactions + FORM UX REVAMP */
 :root{
   --navy:#0a2a3f; --navy-2:#0e3753; --blue:#1d80b9; --green:#60c659; --ink:#0b1321; --muted:#6b7a90;
   --bg:#f6f8fb; --card:#ffffff; --radius:14px; --shadow:0 10px 30px rgba(6,24,44,.08);
@@ -6,7 +6,7 @@
   --field-placeholder:#93a7ba; --error:#cc2e2e; --success:#2e7d32; --warning:#c97a10;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,Noto Sans;color:var(--ink);background:var(--bg);}
+html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,Noto Sans;color:var(--ink);background:var(--bg)}
 img{max-width:100%;height:auto}
 a{color:var(--blue);text-decoration:none} a:hover,a:focus{text-decoration:underline}
 .container{width:min(1200px,92vw);margin-inline:auto}
@@ -85,7 +85,7 @@ footer a{color:#d9ecfb}
 .accordion details[open]{background:#fbfdff}
 .accordion summary{cursor:pointer;font-weight:700}
 
-/* New: Magnetic buttons & ripple, Tilt cards, Progress bar, FAB, Progressline */
+/* Micro-interactions */
 .btn.magnetic{position:relative;will-change:transform;transition:transform .18s ease}
 .btn .ripple{position:absolute;border-radius:50%;transform:scale(0);opacity:.35;background:#fff;animation:ripple .6s ease-out;pointer-events:none}
 @keyframes ripple{to{transform:scale(10);opacity:0}}
@@ -103,36 +103,74 @@ footer a{color:#d9ecfb}
 .progressline>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--blue));transition:width .3s ease}
 
 /* =========================
-   FORM STYLES (Global)
+   FORM UX REVAMP (Global)
    ========================= */
-form{display:block}
-form .card{padding:26px}
-label{display:block;font-weight:700;color:var(--ink);margin:12px 0 6px}
-label .req::after{content:" *";color:var(--error);font-weight:700}
 
+/* Distinct form card look */
+form.card{padding:28px 28px 24px;border-radius:20px;
+  background:
+    radial-gradient(1000px 1000px at -10% -10%, rgba(29,128,185,.05), transparent 50%),
+    radial-gradient(1000px 1000px at 110% 110%, rgba(96,198,89,.05), transparent 50%),
+    var(--card);
+  border:1px solid #e6eef6; box-shadow:0 20px 60px rgba(6,24,44,.10);
+  max-width:860px; margin-inline:auto;
+}
+
+/* Form heading hierarchy (improves readability in the screenshot) */
+form.card .kicker, form.card h2, form.card h3{margin:0}
+form.card h2{font-size:clamp(20px,2.4vw,28px);letter-spacing:.2px;margin-bottom:6px}
+form.card p.lead, form.card>p:first-of-type{color:#42566b;margin-top:2px;margin-bottom:14px;font-size:1rem}
+form.card .section-subtitle{font-weight:700;margin:18px 0 6px}
+
+/* Clean horizontal rule */
+form.card .hr{height:4px;background:#e9f0f7;border-radius:999px;margin:8px 0 18px}
+
+/* Field grid and spacing */
+.form-grid{display:grid;grid-template-columns:1fr;gap:18px}
+.full-span{grid-column:1/-1}
+@media (min-width:780px){ .form-grid{grid-template-columns:repeat(2,1fr)} }
+
+/* Labels and help text */
+label{display:block;font-weight:700;color:var(--ink);margin:0 0 8px;font-size:1rem}
+.help{font-size:.92rem;color:#5d6f86;margin-top:6px}
+.small{font-size:.9rem;color:#6b7a90}
+
+/* Inputs */
 input,select,textarea{
   width:100%; background:var(--field-bg); color:var(--ink);
-  border:1.5px solid var(--field-bd); border-radius:12px;
-  padding:.75rem .9rem; line-height:1.35; font-size:1rem;
+  border:1.6px solid var(--field-bd); border-radius:12px;
+  padding:.82rem 1rem; line-height:1.35; font-size:1rem;
   transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
 textarea{min-height:140px; resize:vertical}
-select{appearance:none; background-image:linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%), linear-gradient(to right, #fff, #fff);
-  background-position:calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), 100% 0;
-  background-size:5px 5px, 5px 5px, 2.5rem 2.5rem; background-repeat:no-repeat;
+select{
+  appearance:none; background-image:
+   linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+   linear-gradient(135deg, var(--muted) 50%, transparent 50%),
+   linear-gradient(to right, #fff, #fff);
+  background-position:calc(100% - 22px) calc(50% - 2px), calc(100% - 16px) calc(50% - 2px), 100% 0;
+  background-size:6px 6px, 6px 6px, 2.5rem 2.5rem; background-repeat:no-repeat;
 }
 input::placeholder, textarea::placeholder{color:var(--field-placeholder)}
 input:hover,select:hover,textarea:hover{border-color:var(--field-bd-hover)}
 input:focus,select:focus,textarea:focus{outline:0;border-color:var(--field-bd-focus);box-shadow:0 0 0 4px rgba(29,128,185,.18)}
 input[disabled],select[disabled],textarea[disabled]{background:#f1f5f9;color:#9aa9b8;cursor:not-allowed}
 
-/* Radios & checkboxes */
-input[type=radio], input[type=checkbox]{width:auto;accent-color:var(--blue);margin-right:.35rem}
-.inline-options{display:flex;flex-wrap:wrap;gap:14px}
+/* Choice groups (radio/checkbox) – bigger, clearer, easier to scan */
+.choice-group{margin:10px 0 18px;display:grid;gap:12px}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1.5px solid #e6eef6;border-radius:12px;background:#fff;transition:border-color .15s ease, box-shadow .15s ease, background .15s}
+.choice:hover{border-color:#cfe0ef;box-shadow:0 6px 20px rgba(6,24,44,.06)}
+.choice strong{font-weight:800}
+.choice .sub{display:block;color:#6b7a90;font-size:.92rem;margin-top:2px}
 
-/* Field wrapper for validation/help */
-.field{margin-bottom:14px}
-.field .help{font-size:.9rem;color:#5d6f86;margin-top:6px}
+input[type=radio], input[type=checkbox]{accent-color:var(--blue);margin-top:3px;flex:0 0 auto;width:1.15rem;height:1.15rem}
+
+/* Radio/checkbox alignment when not wrapped with .choice */
+.inline-options{display:flex;flex-direction:column;gap:14px}
+@media (min-width:640px){ .inline-options{gap:10px} }
+
+/* Validation states */
+.field{margin-bottom:16px}
 .field .msg{font-size:.9rem;margin-top:6px;font-weight:600}
 .field.error input, .field.error select, .field.error textarea,
 input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"]{
@@ -142,27 +180,28 @@ input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="
 .field.success input, .field.success select, .field.success textarea{border-color:var(--success)}
 .field.success .msg{color:var(--success)}
 
-/* Grid layout for complex forms */
-.form-grid{display:grid;grid-template-columns:1fr;gap:16px}
-.form-actions{display:flex;gap:12px;align-items:center;justify-content:flex-start;margin-top:8px}
-.full-span{grid-column:1/-1}
-@media (min-width:720px){
-  .form-grid{grid-template-columns:repeat(2,1fr)}
+/* Form actions */
+form .btn{min-width:200px;font-size:1rem;padding:.9rem 1.2rem;border-radius:12px}
+form .btn.primary{
+  background:linear-gradient(180deg, #6fda6a, var(--green));
+  border:1px solid rgba(0,0,0,.06);
 }
+form .btn.primary:hover{filter:brightness(0.98)}
+form .btn.secondary{border-color:#b4d4ea}
 
-/* Compact inputs inside cards on non-contact areas if needed */
-.card .field{margin-bottom:16px}
+/* The readiness progress line: more contrast, rounded */
+.progressline{height:8px;background:#e9f0f7;border-radius:999px;overflow:hidden;margin:12px 0 18px}
+.progressline>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--blue));box-shadow:inset 0 -1px 0 rgba(0,0,0,.06);transition:width .25s ease}
 
-/* Buttons alignment inside forms */
-form .btn{min-width:180px}
-
-/* Focus visibility (inherits global) */
-:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 3px rgba(29,128,185,.6),0 0 0 6px rgba(255,255,255,.6);border-radius:10px}
-
-/* Success/notice banners (optional utility) */
+/* Success/notice banners */
 .notice{border:1px solid #dfe7ef;background:#f8fbff;color:#0b2a45;border-radius:12px;padding:12px 14px}
 .notice.success{border-color:rgba(46,125,50,.25);background:rgba(46,125,50,.06);color:#1d5e29}
 .notice.warn{border-color:rgba(201,122,16,.25);background:rgba(201,122,16,.06);color:#6b4508}
+
+/* Make the form feel “framed” on large screens */
+@media (min-width:1100px){
+  form.card{padding:32px 36px}
+}
 
 /* ========================= */
 
