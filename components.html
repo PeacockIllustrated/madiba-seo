@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Madiba • SEO Components Showcase</title>
+  <meta name="description" content="SEO-facing UI components for Madiba: accessible, indexable, and on-brand. Example: enhanced bullet list with expandable details." />
+
+  <style>
+    /* ========= Madiba On-Brand Base ========= */
+    :root{
+      --madiba-navy:#0e203b;
+      --madiba-deep:#071427;
+      --madiba-lime:#9bd460;
+      --madiba-teal:#64c7cf;
+      --madiba-sky:#bfeaf0;
+      --madiba-ink:#1a1f2b;
+      --madiba-muted:#6b7380;
+      --madiba-card:#ffffff;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.07);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:#0f172a;
+      background:
+        radial-gradient(1200px 600px at 10% -20%, rgba(100,199,207,.25), transparent 60%),
+        radial-gradient(1000px 500px at 100% 0%, rgba(155,212,96,.20), transparent 60%),
+        linear-gradient(180deg, #f7fbff 0%, #f6f8fb 40%, #f7fbff 100%);
+    }
+
+    /* ========= Header / Intro ========= */
+    header{
+      background: linear-gradient(180deg, var(--madiba-navy), var(--madiba-deep));
+      color:#fff;
+      padding:56px 20px 32px;
+      border-bottom: 4px solid var(--madiba-lime);
+      position:relative;
+      overflow:hidden;
+    }
+    header:after{
+      content:"";
+      position:absolute; inset:auto -10% -60% -10%;
+      height:200px;
+      background:
+        linear-gradient(90deg, var(--madiba-lime), var(--madiba-teal), #0f3a6d);
+      opacity:.15;
+      filter: blur(40px);
+      transform: skewY(-6deg);
+    }
+    .wrap{max-width:1080px;margin:0 auto;padding:0 20px;position:relative}
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height:1.1;
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:0;
+      font-size: clamp(15px, 1.6vw, 18px);
+      color:#e6eef8;
+      max-width:70ch;
+    }
+    .badge{
+      display:inline-block;
+      margin:18px 0 0;
+      font-size:13px;
+      letter-spacing:.4px;
+      padding:8px 12px;
+      border-radius:999px;
+      color:#0e203b;
+      background:linear-gradient(90deg, var(--madiba-lime), var(--madiba-teal));
+      font-weight:600;
+    }
+
+    /* ========= Section Title ========= */
+    section{padding:34px 0}
+    .section-title{
+      font-size: clamp(20px,2.2vw,26px);
+      margin:6px 0 18px;
+      color:var(--madiba-navy);
+    }
+    .section-kicker{
+      color:var(--madiba-muted);
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:12px;
+    }
+
+    /* ========= Component: Enhanced Bullet List =========
+       Goals:
+       • SEO-safe (content present in DOM)
+       • Accessible (keyboard toggles, ARIA, focus styles)
+       • Mobile-friendly (no hover requirement)
+    */
+    .card{
+      background:var(--madiba-card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 18px 6px;
+      border:1px solid #e7eef7;
+    }
+
+    .feature-list{
+      list-style:none;
+      margin:0; padding:0;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    @media (min-width:800px){
+      .feature-list{grid-template-columns: 1fr 1fr}
+    }
+
+    .feature{
+      position:relative;
+      border:1px solid #e7eef7;
+      border-radius:12px;
+      background:#fff;
+      overflow:hidden;
+      transition:border-color .2s, box-shadow .2s, transform .06s;
+    }
+    .feature:focus-within,
+    .feature:hover{
+      border-color:#d7e6f7;
+      box-shadow:0 6px 20px rgba(13,32,59,.08);
+    }
+
+    .feature-header{
+      display:flex; align-items:flex-start; gap:12px;
+      padding:14px 14px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background:var(--madiba-lime);
+      box-shadow:0 0 0 4px rgba(155,212,96,.25);
+      margin-top:6px;
+      flex:0 0 auto;
+    }
+    .feature-title{
+      margin:0;
+      font-size:16px; line-height:1.35;
+      color:var(--madiba-ink);
+      font-weight:700;
+    }
+
+    /* Toggle Button */
+    .feature-toggle{
+      margin-left:auto;
+      appearance:none; border:none; background:#f3f7fb; color:#0e203b;
+      padding:6px 10px; border-radius:10px; font-weight:600; font-size:12px;
+      cursor:pointer;
+    }
+    .feature-toggle:focus{outline:2px solid var(--madiba-teal); outline-offset:2px}
+
+    /* Description panel: in DOM at load, visually collapsed (no display:none) */
+    .feature-body{
+      padding:0 14px 14px;
+      overflow:hidden;
+      max-height:0;
+      transition:max-height .28s ease;
+      color:#2b3342;
+      line-height:1.55;
+      font-size:14px;
+    }
+    .feature[data-expanded="true"] .feature-body{
+      max-height:260px; /* enough for 2–3 lines; adjust if needed */
+    }
+    .feature-body p{margin:0}
+    .bar{
+      height:8px; margin:10px 14px 14px; border-radius:999px;
+      background: linear-gradient(90deg, var(--madiba-lime) 25%, var(--madiba-teal) 50%, #0e203b 100%);
+      opacity:.9;
+    }
+
+    /* Decorative strip under section card */
+    .strip{
+      height:10px; width:100%; border-radius:999px;
+      background: linear-gradient(90deg, var(--madiba-lime) 20%, var(--madiba-teal) 40%, #64b0ff 60%, var(--madiba-navy) 100%);
+      margin-top:16px;
+      opacity:.9;
+    }
+
+    /* Links / small print */
+    .note{color:var(--madiba-muted); font-size:13px; margin-top:8px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="badge">SEO • Accessibility • Components</span>
+      <h1>Madiba – SEO-Facing Components</h1>
+      <p class="subtitle">
+        This internal page showcases UI patterns that keep copy **indexable**, **accessible**, and **on-brand**.
+        Each component ships all descriptive text in the DOM at load (good for SEO) and reveals details with an a11y-friendly toggle (good for UX).
+      </p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <div class="section-kicker">Component • Lists</div>
+      <h2 class="section-title">Enhanced Bullet List (Expandable, SEO-Safe)</h2>
+      <div class="card">
+        <ul class="feature-list" id="sap-feature-list">
+          <!-- Item 1 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true"></span>
+              <h3 class="feature-title">SAP S/4 HANA Cloud – Public Edition</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-1">
+              <p>Fast, scalable, and cost-efficient ERP delivered as SaaS. Ideal for standardised processes,
+                rapid deployments, and predictable total cost of ownership.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 2 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true" style="background:var(--madiba-teal); box-shadow:0 0 0 4px rgba(100,199,207,.25)"></span>
+              <h3 class="feature-title">SAP S/4 HANA Cloud – Private Edition</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-2">
+              <p>Retain deeper control over processes, security, and integrations. Best for complex
+                requirements, regulated industries, and custom workflows.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 3 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true"></span>
+              <h3 class="feature-title">RISE with SAP</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-3">
+              <p>All-in subscription to simplify the move to S/4 HANA, bundling infrastructure, software,
+                and services with a single contract and SLA.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 4 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true" style="background:var(--madiba-teal); box-shadow:0 0 0 4px rgba(100,199,207,.25)"></span>
+              <h3 class="feature-title">GROW with SAP</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-4">
+              <p>Right-sized entry to S/4 HANA for net-new or smaller footprints. Launch quickly with
+                best-practice processes and scale as you grow.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 5 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true"></span>
+              <h3 class="feature-title">SAP Roadmap</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-5">
+              <p>Phased migration plan covering ECC assessment, fit-to-standard, risk, timeline, and cost.
+                Align stakeholders and de-risk delivery before build.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 6 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true" style="background:var(--madiba-teal); box-shadow:0 0 0 4px rgba(100,199,207,.25)"></span>
+              <h3 class="feature-title">SAP Signavio</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-6">
+              <p>Process intelligence to map, analyse, and optimise business processes; accelerates fit-to-standard
+                and change adoption.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 7 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true"></span>
+              <h3 class="feature-title">SAP Cloud ALM</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-7">
+              <p>Application lifecycle management for S/4 HANA: requirements, testing, operations, and
+                continuous improvement in the cloud.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 8 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true" style="background:var(--madiba-teal); box-shadow:0 0 0 4px rgba(100,199,207,.25)"></span>
+              <h3 class="feature-title">SAP S/4 HANA Conversion (ECC → S/4)</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-8">
+              <p>Selective brownfield or full conversion from ECC to S/4 HANA. Pre-built tooling reduces
+                downtime, safeguards data, and shortens cutover.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 9 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true"></span>
+              <h3 class="feature-title">SAP Greenfield Implementation</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-9">
+              <p>Start fresh on S/4 HANA with fit-to-standard processes, clean data, and extensibility on
+                SAP BTP while keeping the core clean.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 10 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true" style="background:var(--madiba-teal); box-shadow:0 0 0 4px rgba(100,199,207,.25)"></span>
+              <h3 class="feature-title">SAP for New Customers</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-10">
+              <p>Guided onboarding to S/4 HANA for first-time SAP adopters: scope, licensing path
+                (RISE/GROW), rapid value, and training.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 11 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true"></span>
+              <h3 class="feature-title">SAP ECC and SAP BW Transformations</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-11">
+              <p>Modernise legacy ECC and BW with data quality uplift, code remediation, and staged
+                migration paths to S/4 HANA and BW/4HANA.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+
+          <!-- Item 12 -->
+          <li class="feature" data-expanded="false">
+            <div class="feature-header">
+              <span class="dot" aria-hidden="true" style="background:var(--madiba-teal); box-shadow:0 0 0 4px rgba(100,199,207,.25)"></span>
+              <h3 class="feature-title">Keep Core Clean</h3>
+              <button class="feature-toggle" aria-expanded="false">Details</button>
+            </div>
+            <div class="feature-body" id="body-12">
+              <p>Adopt standard in the core and move differentiation to SAP BTP extensions. Reduce
+                upgrade effort and keep your ERP agile.</p>
+            </div>
+            <div class="bar" aria-hidden="true"></div>
+          </li>
+        </ul>
+
+        <div class="strip" aria-hidden="true"></div>
+        <p class="note">
+          SEO Note: All descriptions are rendered in the DOM at load. We collapse them with <code>max-height</code> (not <code>display:none</code>) and toggle via a button with
+          <code>aria-expanded</code> for accessibility. Primary keywords live in the always-visible titles.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Accessible toggles: keep content in DOM; no lazy insertion.
+    const list = document.getElementById('sap-feature-list');
+    list.querySelectorAll('.feature').forEach((item, i)=>{
+      const btn = item.querySelector('.feature-toggle');
+      const body = item.querySelector('.feature-body');
+      const id = 'feature-body-'+(i+1);
+      body.id = body.id || id;
+      btn.setAttribute('aria-controls', body.id);
+
+      btn.addEventListener('click', ()=>{
+        const expanded = item.getAttribute('data-expanded') === 'true';
+        item.setAttribute('data-expanded', String(!expanded));
+        btn.setAttribute('aria-expanded', String(!expanded));
+      });
+
+      // Enable keyboard toggle when the header (title area) is focused
+      item.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault(); btn.click();
+        }
+      });
+      item.tabIndex = 0; // make the whole item focusable for quick keyboard scan
+    });
+  </script>
+</body>
+</html>
