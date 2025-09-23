@@ -3,401 +3,339 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Madiba • SEO Components Showcase</title>
-<meta name="description" content="SEO-facing UI components for Madiba: accessible, indexable, and on-brand. Example: enhanced bullet list with expandable details." />
+<title>Madiba • SEO Components Library</title>
+<meta name="description" content="On-brand SEO-facing components for Madiba: lists, FAQ, comparisons, stats, CTAs, trust bands, and blog cards—accessible and indexable." />
 <style>
-  /* ===== Brand & Base ===== */
+  /* ===== Brand & Base (same tokens) ===== */
   :root{
-    --navy:#0e203b;
-    --deep:#081426;
-    --lime:#9bd460;
-    --teal:#64c7cf;
-    --ink:#1b2433;
-    --muted:#6c7482;
-    --card:#ffffff;
-    --ring:#91d6e0;
-    --radius:16px;
-    --shadow:0 8px 28px rgba(10,24,46,.08);
+    --navy:#0e203b; --deep:#081426; --lime:#9bd460; --teal:#64c7cf;
+    --ink:#1b2433; --muted:#6c7482; --card:#ffffff; --ring:#91d6e0;
+    --radius:16px; --shadow:0 8px 28px rgba(10,24,46,.08);
   }
   *{box-sizing:border-box}
-  html,body{height:100%}
   body{
-    margin:0;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    color:var(--ink);
+    margin:0; color:var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     background:
       radial-gradient(1200px 600px at 10% -20%, rgba(100,199,207,.18), transparent 60%),
       radial-gradient(900px 420px at 100% 0%, rgba(155,212,96,.14), transparent 60%),
       linear-gradient(180deg,#f7fbff 0%,#f5f8fc 45%,#f7fbff 100%);
   }
+  header{background:linear-gradient(180deg,var(--navy),var(--deep)); color:#fff; padding:56px 20px 32px; border-bottom:3px solid var(--lime)}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 20px}
+  h1{margin:0 0 8px; font-size:clamp(28px,3.2vw,44px)}
+  .subtitle{margin:0; color:#e7eff8}
+  .badge{display:inline-block; margin:14px 0 0; font-size:12px; padding:7px 12px; border-radius:999px; color:#0e203b; background:linear-gradient(90deg,var(--lime),var(--teal)); font-weight:700}
+  section{padding:34px 0}
+  .kicker{color:var(--muted); text-transform:uppercase; font-weight:700; letter-spacing:.14em; font-size:12px}
+  .title{color:var(--navy); font-size:clamp(20px,2.2vw,26px); margin:6px 0 18px}
+  .card{background:rgba(255,255,255,.75); backdrop-filter:saturate(1.15) blur(6px); border:1px solid rgba(14,32,59,.08); box-shadow:var(--shadow); border-radius:var(--radius); padding:18px}
 
-  /* ===== Header ===== */
-  header{
-    background:linear-gradient(180deg,var(--navy),var(--deep));
-    color:#fff; padding:56px 20px 36px; border-bottom:3px solid var(--lime); position:relative; overflow:hidden;
-  }
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;position:relative}
-  h1{margin:0 0 10px; font-size:clamp(28px,3.2vw,44px); line-height:1.12}
-  .subtitle{margin:0; font-size:clamp(14px,1.6vw,18px); color:#eaf1f9; max-width:72ch}
-  .badge{display:inline-block;margin-top:16px; font-size:12px; letter-spacing:.4px; padding:7px 11px; border-radius:999px; color:#0e203b; background:linear-gradient(90deg,var(--lime),var(--teal)); font-weight:700}
+  /* ===== Utility ===== */
+  .grid-2{display:grid; gap:12px; grid-template-columns:1fr}
+  @media (min-width:860px){ .grid-2{grid-template-columns:1fr 1fr} }
+  .note{color:var(--muted); font-size:13px}
 
-  /* ===== Sections ===== */
-  section{padding:32px 0}
-  .kicker{color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.14em; font-size:12px}
-  .title{font-size:clamp(20px,2.2vw,26px); margin:6px 0 18px; color:var(--navy)}
-
-  /* ===== Card ===== */
-  .card{
-    background:rgba(255,255,255,.75);
-    -webkit-backdrop-filter:saturate(1.15) blur(6px);
-    backdrop-filter:saturate(1.15) blur(6px);
-    border:1px solid rgba(14,32,59,.08);
-    box-shadow:var(--shadow);
-    border-radius:var(--radius);
-    padding:18px;
-  }
-
-  /* ===== Feature list ===== */
-  .feature-list{
-    list-style:none; margin:0; padding:0;
-    display:grid; gap:12px; grid-template-columns:1fr;
-  }
-  @media (min-width:860px){ .feature-list{ grid-template-columns:1fr 1fr } }
-
-  .feature{
-    border:1px solid rgba(14,32,59,.08);
-    background:#fff;
-    border-radius:14px;
-    overflow:hidden;
-    transition:border-color .2s, box-shadow .2s, transform .04s;
-  }
-  .feature:hover, .feature:focus-within{
-    border-color:rgba(14,32,59,.18);
-    box-shadow:0 8px 24px rgba(14,32,59,.08);
-  }
-
-  .row{
-    display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center;
-    padding:14px 14px 10px; position:relative;
-  }
-
-  .dot{
-    width:11px; height:11px; border-radius:50%;
-    background:var(--lime); box-shadow:0 0 0 5px rgba(155,212,96,.25);
-  }
-  .dot.alt{ background:var(--teal); box-shadow:0 0 0 5px rgba(100,199,207,.25) }
-
-  .feature h3{
-    margin:0; font-size:17px; font-weight:800; color:#0f1b2d; letter-spacing:.1px;
-  }
-
-  .toggle{
-    display:inline-flex; align-items:center; gap:6px;
-    appearance:none; border:1px solid rgba(14,32,59,.12); background:#f6f9fc;
-    color:#0e203b; padding:8px 11px; border-radius:11px; font-weight:700; font-size:12px; cursor:pointer;
-  }
-  .toggle svg{width:14px; height:14px; transition:transform .24s ease}
-  .feature[data-expanded="true"] .toggle svg{ transform:rotate(180deg) }
-  .toggle:focus{ outline:3px solid var(--ring); outline-offset:2px }
-
-  .meter{
-    height:7px; margin:8px 14px 0; border-radius:999px; background:linear-gradient(90deg,var(--lime) 20%, var(--teal) 55%, #0e203b 100%);
-    opacity:.95;
-  }
-
-  /* ===== Body (now fully hidden when collapsed) =====
-     Keep in DOM (SEO), but no visual bleed. */
-  .body{
-    padding:0 14px 0;
-    overflow:hidden;
-    max-height:0;
-    opacity:0;
-    visibility:hidden;
-    transition:max-height .3s ease, opacity .2s ease, visibility .3s step-end, padding .2s ease;
-    color:#273246; line-height:1.55; font-size:14px;
-  }
-  .feature[data-expanded="true"] .body{
-    padding:10px 14px 14px;
-    max-height:240px;   /* adjust if you add longer blurbs */
-    opacity:1;
-    visibility:visible;
-    transition:max-height .34s ease, opacity .22s ease, visibility 0s step-start, padding .22s ease;
-  }
+  /* ===== 1) Enhanced Bullet List (from previous step, shortened CSS) ===== */
+  .feature-list{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+  @media (min-width:860px){ .feature-list{grid-template-columns:1fr 1fr} }
+  .feature{border:1px solid rgba(14,32,59,.10); background:#fff; border-radius:14px; overflow:hidden; transition:border-color .2s, box-shadow .2s}
+  .feature:hover, .feature:focus-within{border-color:rgba(14,32,59,.18); box-shadow:0 8px 24px rgba(14,32,59,.08)}
+  .row{display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center; padding:14px}
+  .dot{width:11px; height:11px; border-radius:50%; background:var(--lime); box-shadow:0 0 0 5px rgba(155,212,96,.25)}
+  .dot.alt{background:var(--teal); box-shadow:0 0 0 5px rgba(100,199,207,.25)}
+  .feature h3{margin:0; font-size:17px; font-weight:800; color:#0f1b2d}
+  .toggle{display:inline-flex; align-items:center; gap:6px; border:1px solid rgba(14,32,59,.12); background:#f6f9fc; color:#0e203b; padding:8px 11px; border-radius:11px; font-weight:700; font-size:12px; cursor:pointer}
+  .toggle:focus{outline:3px solid var(--ring); outline-offset:2px}
+  .toggle svg{width:14px; height:14px; transition:transform .24s}
+  .feature[data-expanded="true"] .toggle svg{transform:rotate(180deg)}
+  .meter{height:7px; margin:8px 14px 0; border-radius:999px; background:linear-gradient(90deg,var(--lime) 20%, var(--teal) 55%, #0e203b 100%); opacity:.95}
+  .body{padding:0 14px 0; overflow:hidden; max-height:0; opacity:0; visibility:hidden; transition:max-height .3s ease, opacity .2s, visibility .3s step-end, padding .2s}
+  .feature[data-expanded="true"] .body{padding:10px 14px 14px; max-height:240px; opacity:1; visibility:visible; transition:max-height .34s ease, opacity .22s, visibility 0s step-start, padding .22s}
   .body p{margin:0}
 
-  /* Reduced motion respect */
-  @media (prefers-reduced-motion:reduce){
-    .body{transition:none}
-    .toggle svg{transition:none}
-    .feature{transition:none}
-  }
+  /* ===== 2) FAQ Accordion ===== */
+  .faq{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+  .faq-item{border:1px solid rgba(14,32,59,.10); border-radius:12px; background:#fff}
+  .faq-q{width:100%; text-align:left; background:#fff; border:0; padding:14px 16px; font-weight:800; color:#0f1b2d; display:flex; align-items:center; justify-content:space-between; cursor:pointer}
+  .faq-q:focus{outline:3px solid var(--ring); outline-offset:2px}
+  .faq-a{padding:0 16px; max-height:0; overflow:hidden; opacity:0; visibility:hidden; transition:max-height .3s, opacity .2s, visibility .3s step-end}
+  .faq-item[data-open="true"] .faq-a{padding:10px 16px 16px; max-height:260px; opacity:1; visibility:visible; transition:max-height .34s, opacity .22s, visibility 0s step-start}
+  .faq-a p{margin:0}
 
-  .note{color:var(--muted); font-size:13px; margin-top:10px}
+  /* ===== 3) Comparison Table (Public vs Private vs RISE/GROW) ===== */
+  .table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid rgba(14,32,59,.10); border-radius:14px; background:#fff}
+  .table th, .table td{padding:14px; text-align:left; vertical-align:top}
+  .table thead th{background:#f5f8fc; color:#0f1b2d; font-size:14px; font-weight:800}
+  .table tbody tr + tr td{border-top:1px solid #edf2f7}
+  .chip{display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700; background:rgba(155,212,96,.18); color:#28421a}
+
+  /* ===== 4) KPI Stat Band ===== */
+  .stats{display:grid; gap:12px; grid-template-columns:1fr; text-align:center}
+  @media (min-width:720px){ .stats{grid-template-columns:repeat(3,1fr)} }
+  .stat{background:#fff; border:1px solid rgba(14,32,59,.10); border-radius:14px; padding:18px}
+  .stat strong{display:block; font-size:28px; color:var(--navy)}
+  .stat span{color:var(--muted); font-size:13px}
+
+  /* ===== 5) CTA Block ===== */
+  .cta{display:grid; gap:12px; grid-template-columns:1fr; align-items:center}
+  @media (min-width:860px){ .cta{grid-template-columns:2fr 1fr} }
+  .cta .panel{background:#fff; border:1px solid rgba(14,32,59,.10); border-radius:14px; padding:18px}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 16px; border-radius:12px; border:1px solid rgba(14,32,59,.12); background:linear-gradient(90deg,var(--lime),var(--teal)); color:#0e203b; font-weight:800; text-decoration:none}
+
+  /* ===== 6) Trust Band ===== */
+  .trust{display:flex; flex-wrap:wrap; gap:16px; align-items:center}
+  .trust .logo{height:34px; width:120px; background:#f2f6fb; border:1px dashed rgba(14,32,59,.15); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#7a8798; font-size:12px}
+  .disclaimer{margin-top:8px; font-size:12px; color:var(--muted)}
+
+  /* ===== 7) Blog / Insights Cards ===== */
+  .cards{display:grid; gap:12px; grid-template-columns:1fr}
+  @media (min-width:860px){ .cards{grid-template-columns:1fr 1fr} }
+  .card-post{background:#fff; border:1px solid rgba(14,32,59,.10); border-radius:14px; padding:16px}
+  .card-post h3{margin:0 0 6px; font-size:18px; color:#0f1b2d}
+  .card-post p{margin:0 0 12px; color:#2a3344}
+  .link{color:#0e203b; font-weight:800; text-decoration:none; border-bottom:2px solid rgba(14,32,59,.2)}
 </style>
 </head>
 <body>
   <header>
     <div class="wrap">
       <span class="badge">SEO • Accessibility • Components</span>
-      <h1>Madiba – SEO-Facing Components</h1>
-      <p class="subtitle">
-        Patterns that keep copy **indexable** (in the DOM at load), **accessible** (keyboard/ARIA), and **on-brand**. 
-        The list below uses a true collapse (no text bleed) while remaining SEO-safe.
-      </p>
+      <h1>Madiba – SEO-Facing Component Library</h1>
+      <p class="subtitle">Each component keeps descriptive copy **in the DOM at load** and uses accessible toggles. Good for crawlers, good for users.</p>
     </div>
   </header>
 
   <main class="wrap">
+
+    <!-- 1) Enhanced Bullet List (kept for context) -->
     <section>
       <div class="kicker">Component • Lists</div>
       <h2 class="title">Enhanced Bullet List (Expandable, Hidden When Collapsed)</h2>
-
       <div class="card">
         <ul class="feature-list" id="features">
-          <!-- 1 -->
           <li class="feature" data-expanded="false">
             <div class="row">
               <span class="dot" aria-hidden="true"></span>
               <h3>SAP S/4 HANA Cloud – Public Edition</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f1">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <button class="toggle" aria-expanded="false" aria-controls="f1">Details
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
             </div>
             <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f1">
-              <p>Fast, scalable, and cost-efficient ERP delivered as SaaS. Ideal for standardised processes,
-                rapid value, and predictable total cost of ownership.</p>
-            </div>
+            <div class="body" id="f1"><p>Fast, scalable, and cost-efficient ERP delivered as SaaS. Ideal for standardised processes, rapid value, and predictable TCO.</p></div>
           </li>
 
-          <!-- 2 -->
           <li class="feature" data-expanded="false">
             <div class="row">
               <span class="dot alt" aria-hidden="true"></span>
               <h3>SAP S/4 HANA Cloud – Private Edition</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f2">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <button class="toggle" aria-expanded="false" aria-controls="f2">Details
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2"/></svg>
               </button>
             </div>
             <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f2">
-              <p>Retain deeper control over processes, security, and integrations. Best for complex
-                requirements, regulated industries, and custom workflows.</p>
-            </div>
+            <div class="body" id="f2"><p>Retain deeper control over processes, security, and integrations. Best for complex requirements, regulated industries, and custom workflows.</p></div>
           </li>
 
-          <!-- 3 -->
           <li class="feature" data-expanded="false">
             <div class="row">
               <span class="dot" aria-hidden="true"></span>
               <h3>RISE with SAP</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f3">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <button class="toggle" aria-expanded="false" aria-controls="f3">Details
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2"/></svg>
               </button>
             </div>
             <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f3">
-              <p>All-in subscription to simplify the move to S/4 HANA, bundling infrastructure, software, and services
-                with a single contract and SLA.</p>
-            </div>
+            <div class="body" id="f3"><p>All-in subscription to simplify the move to S/4 HANA, bundling infrastructure, software, and services with a single contract and SLA.</p></div>
           </li>
 
-          <!-- 4 -->
           <li class="feature" data-expanded="false">
             <div class="row">
               <span class="dot alt" aria-hidden="true"></span>
               <h3>GROW with SAP</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f4">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <button class="toggle" aria-expanded="false" aria-controls="f4">Details
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2"/></svg>
               </button>
             </div>
             <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f4">
-              <p>Right-sized entry to S/4 HANA for net-new or smaller footprints. Launch quickly with best-practice
-                processes and scale as you grow.</p>
+            <div class="body" id="f4"><p>Right-sized entry to S/4 HANA for net-new or smaller footprints. Launch quickly with best-practice processes and scale as you grow.</p></div>
+          </li>
+        </ul>
+        <p class="note">SEO note: details are collapsed with <code>max-height</code>, not removed; all copy is indexable.</p>
+      </div>
+    </section>
+
+    <!-- 2) FAQ Accordion -->
+    <section>
+      <div class="kicker">Component • FAQ</div>
+      <h2 class="title">FAQ: SAP S/4 HANA Migration</h2>
+      <div class="card">
+        <ul class="faq" id="faq">
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a1">
+              How long does migration from ECC to S/4 HANA take?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a" id="a1">
+              <p>Mid-market programmes typically run 6–12 months; enterprise migrations are phased 12–24+ months depending on data, integrations, geographies, and change management.</p>
             </div>
           </li>
-
-          <!-- 5 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot" aria-hidden="true"></span>
-              <h3>SAP Roadmap</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f5">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f5">
-              <p>Phased migration plan covering ECC assessment, fit-to-standard, risk, timeline, and cost.
-                Align stakeholders and de-risk delivery before build.</p>
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a2">
+              What’s the difference between RISE and GROW with SAP?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </button>
+            <div class="faq-a" id="a2">
+              <p><strong>RISE</strong> targets established SAP customers consolidating to cloud with one contract; <strong>GROW</strong> suits new or smaller footprints starting greenfield with prescriptive scope.</p>
             </div>
           </li>
-
-          <!-- 6 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot alt" aria-hidden="true"></span>
-              <h3>SAP Signavio</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f6">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f6">
-              <p>Process intelligence to map, analyse, and optimise business processes; accelerates fit-to-standard
-                and change adoption.</p>
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a3">
+              Public vs Private Cloud — how do I choose?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </button>
+            <div class="faq-a" id="a3">
+              <p><strong>Public</strong>: faster value, standardised processes, SaaS economics. <strong>Private</strong>: greater control and customisation for complex or regulated requirements.</p>
             </div>
           </li>
-
-          <!-- 7 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot" aria-hidden="true"></span>
-              <h3>SAP Cloud ALM</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f7">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f7">
-              <p>Application lifecycle management for S/4 HANA: requirements, testing, operations, and continuous
-                improvement in the cloud.</p>
-            </div>
-          </li>
-
-          <!-- 8 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot alt" aria-hidden="true"></span>
-              <h3>SAP S/4 HANA Conversion (ECC → S/4)</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f8">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f8">
-              <p>Selective brownfield or full conversion from ECC to S/4 HANA. Pre-built tooling reduces downtime,
-                safeguards data, and shortens cutover.</p>
-            </div>
-          </li>
-
-          <!-- 9 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot" aria-hidden="true"></span>
-              <h3>SAP Greenfield Implementation</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f9">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f9">
-              <p>Start fresh on S/4 HANA with fit-to-standard processes, clean data, and extensibility on SAP BTP
-                while keeping the core clean.</p>
-            </div>
-          </li>
-
-          <!-- 10 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot alt" aria-hidden="true"></span>
-              <h3>SAP for New Customers</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f10">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f10">
-              <p>Guided onboarding to S/4 HANA for first-time SAP adopters: scope, licensing path (RISE/GROW),
-                rapid value, and training.</p>
-            </div>
-          </li>
-
-          <!-- 11 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot" aria-hidden="true"></span>
-              <h3>SAP ECC and SAP BW Transformations</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f11">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f11">
-              <p>Modernise legacy ECC and BW with data quality uplift, code remediation, and staged migration
-                paths to S/4 HANA and BW/4HANA.</p>
-            </div>
-          </li>
-
-          <!-- 12 -->
-          <li class="feature" data-expanded="false">
-            <div class="row">
-              <span class="dot alt" aria-hidden="true"></span>
-              <h3>Keep Core Clean</h3>
-              <button class="toggle" aria-expanded="false" aria-controls="f12">
-                <span>Details</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-            <div class="meter" aria-hidden="true"></div>
-            <div class="body" id="f12">
-              <p>Adopt standard in the core and move differentiation to SAP BTP extensions. Reduce upgrade effort and keep your ERP agile.</p>
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a4">
+              What drives cost the most?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </button>
+            <div class="faq-a" id="a4">
+              <p>Data volume/quality, custom code remediation, number of integrations, multi-country rollout, non-functional requirements, and change/training effort.</p>
             </div>
           </li>
         </ul>
-
-        <p class="note">
-          SEO note: descriptions remain in the HTML at load. We hide them with <code>max-height:0</code>, <code>overflow:hidden</code>, 
-          and <code>visibility:hidden</code> (no <code>display:none</code>), then toggle with a button using <code>aria-expanded</code>.
-        </p>
+        <p class="note">All answers are present in the HTML at load; the accordion only toggles visibility.</p>
       </div>
     </section>
+
+    <!-- 3) Comparison Table -->
+    <section>
+      <div class="kicker">Component • Comparison</div>
+      <h2 class="title">S/4 HANA Options Compared</h2>
+      <div class="card">
+        <table class="table" aria-describedby="compnote">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Best For</th>
+              <th>Strengths</th>
+              <th>Considerations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="chip">Public Edition</span></td>
+              <td>Standardised processes, faster time-to-value</td>
+              <td>SaaS model, rapid deployment, predictable TCO</td>
+              <td>Less customisation; adopt fit-to-standard</td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:rgba(100,199,207,.2); color:#0e3b42;">Private Edition</span></td>
+              <td>Complex/regulatory use cases; legacy integrations</td>
+              <td>Greater control, extensibility, integration depth</td>
+              <td>Higher ownership effort vs Public</td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:rgba(155,212,96,.2)">RISE with SAP</span></td>
+              <td>Existing SAP customers moving to cloud</td>
+              <td>Single contract/SLA; bundled infra + software</td>
+              <td>Scope/guardrails defined by subscription</td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:rgba(100,199,207,.2); color:#0e3b42;">GROW with SAP</span></td>
+              <td>Net-new or smaller SAP footprints</td>
+              <td>Prescriptive, quicker start; scale as you grow</td>
+              <td>Best for greenfield scenarios</td>
+            </tr>
+          </tbody>
+        </table>
+        <p id="compnote" class="note">Use this in SEO content pages; dense keyword/context that crawlers can read without interaction.</p>
+      </div>
+    </section>
+
+    <!-- 4) KPI Stat Band -->
+    <section>
+      <div class="kicker">Component • Proof</div>
+      <h2 class="title">Proven Delivery</h2>
+      <div class="card">
+        <div class="stats">
+          <div class="stat"><strong>1,500+</strong><span>Completed Projects</span></div>
+          <div class="stat"><strong>300+</strong><span>SAP Consultants</span></div>
+          <div class="stat"><strong>25+ years</strong><span>Of Experience</span></div>
+        </div>
+        <p class="note">Stats improve trust and entity recognition for SEO; keep numbers in plain text.</p>
+      </div>
+    </section>
+
+    <!-- 5) CTA Block -->
+    <section>
+      <div class="kicker">Component • Calls to Action</div>
+      <h2 class="title">Plan Your SAP S/4 HANA Migration</h2>
+      <div class="card cta">
+        <div class="panel">
+          <p><strong>Talk to our consultants</strong> about <em>RISE/GROW</em>, <em>Public vs Private</em>, and your <em>ECC → S/4 HANA</em> path.</p>
+        </div>
+        <div class="panel" style="text-align:center">
+          <a class="btn" href="#book">Book a 30-minute consultation</a>
+          <div style="height:8px"></div>
+          <a class="btn" href="#estimate" style="background:linear-gradient(90deg,var(--teal),var(--lime))">Request a migration estimate</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6) Trust Band -->
+    <section>
+      <div class="kicker">Component • Trust</div>
+      <h2 class="title">Trusted by Industry Leaders</h2>
+      <div class="card">
+        <div class="trust">
+          <div class="logo">Allergan</div>
+          <div class="logo">A+E Networks</div>
+          <div class="logo">Duracell</div>
+          <div class="logo">KARL STORZ</div>
+          <div class="logo">SAP</div>
+          <div class="logo">UiPath</div>
+          <div class="logo">AWS</div>
+        </div>
+        <p class="disclaimer"><em>Important note:</em> Madiba is not associated with or sponsored by any of these registered or trademark owners.</p>
+      </div>
+    </section>
+
+    <!-- 7) Blog / Insights Cards -->
+    <section>
+      <div class="kicker">Component • Insights</div>
+      <h2 class="title">Get Industry Insights in Real-Time</h2>
+      <div class="card">
+        <div class="cards">
+          <article class="card-post">
+            <h3>S/4 HANA Conversion: Key Areas to Get Right</h3>
+            <p>Landscape assessment, custom code, data quality, integration scope, cutover planning, and post-go-live stabilisation.</p>
+            <a class="link" href="#read1">Read more</a>
+          </article>
+          <article class="card-post">
+            <h3>What is SAP S/4 HANA? A Basic Introduction</h3>
+            <p>Plain-English overview for business and IT leaders: why in-memory, what changes from ECC, and where to start.</p>
+            <a class="link" href="#read2">Read more</a>
+          </article>
+        </div>
+        <p class="note">Keep these cards fresh to boost topical authority and recrawl frequency.</p>
+      </div>
+    </section>
+
   </main>
 
 <script>
-  const list = document.getElementById('features');
-  list.querySelectorAll('.feature').forEach((item, idx)=>{
+  // List toggles
+  document.querySelectorAll('.feature').forEach((item, idx)=>{
     const btn = item.querySelector('.toggle');
     const body = item.querySelector('.body');
     const id = body.id || `f${idx+1}`;
-    body.id = id;
-    btn.setAttribute('aria-controls', id);
+    body.id = id; btn.setAttribute('aria-controls', id);
 
     btn.addEventListener('click', ()=>{
       const open = item.getAttribute('data-expanded') === 'true';
@@ -405,10 +343,23 @@
       btn.setAttribute('aria-expanded', String(!open));
     });
 
-    // Whole item toggle with keyboard
     item.tabIndex = 0;
-    item.addEventListener('keydown', (e)=>{
+    item.addEventListener('keydown', e=>{
       if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
+    });
+  });
+
+  // FAQ toggles
+  document.querySelectorAll('.faq-item').forEach((it, i)=>{
+    const q = it.querySelector('.faq-q');
+    const a = it.querySelector('.faq-a');
+    const id = a.id || `a${i+1}`;
+    a.id = id; q.setAttribute('aria-controls', id);
+
+    q.addEventListener('click', ()=>{
+      const open = it.getAttribute('data-open') === 'true';
+      it.setAttribute('data-open', String(!open));
+      q.setAttribute('aria-expanded', String(!open));
     });
   });
 </script>
