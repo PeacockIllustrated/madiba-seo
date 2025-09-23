@@ -1,423 +1,592 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SAP S/4HANA Migration, RISE & Analytics Partner | Madiba</title>
-  <meta name="description" content="Move to SAP S/4HANA with less risk and faster value. Brownfield, Greenfield, Selective Data Transition, RISE & GROW with SAP, SAP BTP extensions, Datasphere & Analytics, and 24/7 managed services.">
-  <link rel="canonical" href="https://www.madiba.com/">
-  <meta property="og:title" content="SAP S/4HANA Migration, RISE & Analytics Partner | Madiba">
-  <meta property="og:description" content="Plan and deliver S/4HANA migrations (Brownfield, Greenfield, SDT), build on SAP BTP, and stand up executive-ready analytics with Datasphere & SAC.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.madiba.com/">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="/assets/img/logo.svg">
-  <link rel="preload" href="/assets/css/styles.css" as="style">
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <script defer src="/assets/js/main.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Madiba • SAP S/4 HANA Cloud Consulting, RISE & GROW with SAP, Data & Analytics</title>
+  <meta name="description" content="Madiba helps organisations migrate from ECC to SAP S/4 HANA Cloud. RISE & GROW with SAP, Public vs Private Cloud, SAP BTP, Data & Analytics, Managed Services. 1,500+ projects, 300+ consultants, 25+ years." />
+  <link rel="canonical" href="https://www.madiba.com/" />
 
-  <!-- Organization schema -->
+  <!-- Open Graph -->
+  <meta property="og:title" content="Madiba • SAP S/4 HANA Cloud Consulting" />
+  <meta property="og:description" content="RISE & GROW with SAP. Public & Private Cloud. ECC → S/4 HANA migration. Data & Analytics on SAP BTP. 1,500+ projects delivered." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="hero-placeholder.jpg" />
+
+  <!-- JSON-LD (Organisation & WebSite) -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"Madiba",
-    "url":"https://www.madiba.com/",
-    "logo":"https://www.madiba.com/wp-content/uploads/logo.png",
-    "sameAs":["https://www.linkedin.com/company/madiba-inc/"]
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Madiba Inc.",
+    "url": "https://www.madiba.com",
+    "logo": "https://www.madiba.com/logo.png",
+    "sameAs": ["https://www.linkedin.com/company/madiba-inc/","https://www.youtube.com/"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "16481 Scientific",
+      "addressLocality": "Irvine",
+      "addressRegion": "CA",
+      "postalCode": "92618",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-949-716-8979",
+      "contactType": "sales",
+      "areaServed": "GB, US, EU"
+    }
   }
   </script>
-
-  <!-- Website schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"WebSite",
-    "url":"https://www.madiba.com/",
     "name":"Madiba",
+    "url":"https://www.madiba.com",
     "potentialAction":{
       "@type":"SearchAction",
-      "target":"https://www.madiba.com/?s={search_term_string}",
-      "query-input":"required name=search_term_string"
+      "target":"https://www.madiba.com/search?q={query}",
+      "query-input":"required name=query"
     }
   }
   </script>
+
+  <style>
+    :root{
+      --navy:#0e203b; --deep:#081426; --ink:#1a2334; --muted:#6c7482;
+      --lime:#9bd460; --teal:#64c7cf; --sky:#e9f5f7; --paper:#ffffff;
+      --ring:#91d6e0; --radius:16px; --shadow:0 10px 32px rgba(10,24,46,.10);
+      --bg:linear-gradient(180deg,#f7fbff 0%,#f5f8fc 40%,#f7fbff 100%);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+
+    a{color:#0e203b;text-decoration:none}
+    a:hover{opacity:.9}
+
+    .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+    /* Top bar */
+    .top{background:#0b1a32;color:#cfe3ff;font-size:13px}
+    .top .wrap{display:flex;gap:12px;align-items:center;justify-content:flex-end;padding:8px 20px}
+    .top a{color:#cfe3ff}
+
+    /* Header / nav */
+    header.site{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e7eef7}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{height:30px;width:96px;background:#0e203b;border-radius:8px}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{font-weight:600;color:#10233c}
+    .cta{background:linear-gradient(90deg,var(--lime),var(--teal));padding:10px 14px;border-radius:12px;color:#0e203b;font-weight:800;border:1px solid rgba(14,32,59,.1)}
+
+    /* Hero */
+    .hero{background:linear-gradient(180deg,var(--navy),var(--deep));color:#fff;position:relative;overflow:hidden}
+    .hero:after{
+      content:"";position:absolute;inset:auto -20% -60% -20%;height:220px;
+      background:linear-gradient(90deg,var(--lime),var(--teal),#2b6cb0);opacity:.15;filter:blur(50px);transform:skewY(-6deg)
+    }
+    .hero .wrap{display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:center;padding:56px 20px}
+    @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr} }
+    .hero h1{margin:0 0 10px;font-size:clamp(28px,3.4vw,44px);line-height:1.12}
+    .hero p{margin:0 0 18px;color:#dce8f8;max-width:70ch}
+    .tile-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    @media (max-width:900px){ .tile-row{grid-template-columns:1fr} }
+    .tile{
+      background:#f1f7fb;border:1px solid #ccdfef;border-radius:14px;padding:14px;color:#0f1b2d
+    }
+    .tile h3{margin:0 0 6px;font-size:16px}
+    .tile .link{display:inline-flex;align-items:center;gap:6px;font-weight:800}
+    .hero-img{background:#0a1a2e url('hero-placeholder.jpg') center/cover no-repeat;border-radius:14px;min-height:260px;border:1px solid rgba(255,255,255,.08)}
+
+    /* Section shell */
+    section{padding:36px 0}
+    .kicker{color:var(--muted);text-transform:uppercase;font-weight:800;letter-spacing:.14em;font-size:12px;margin-bottom:6px}
+    h2.section-title{margin:0 0 10px;font-size:clamp(22px,2.4vw,30px);color:var(--navy)}
+    .card{background:rgba(255,255,255,.85);backdrop-filter:saturate(1.1) blur(6px);border:1px solid #e5edf7;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+
+    /* About band + stats */
+    .about{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+    @media (max-width:900px){ .about{grid-template-columns:1fr} }
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media (max-width:600px){ .stats{grid-template-columns:1fr 1fr 1fr} }
+    .stat{background:#fff;border:1px solid #e7eef7;border-radius:14px;padding:16px;text-align:center}
+    .stat strong{display:block;font-size:26px;color:var(--navy)}
+    .stat span{font-size:12px;color:var(--muted)}
+
+    /* Trust strip */
+    .trust{background:#0f1f38;color:#fff;border-radius:14px;padding:14px;border:1px solid #203251}
+    .logo-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px}
+    .logo-pill{height:34px;width:120px;border-radius:8px;border:1px dashed rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;color:#c9d7ef;font-size:12px;background:rgba(255,255,255,.05)}
+    .disclaimer{margin-top:8px;font-size:12px;opacity:.85}
+
+    /* Dual feature cards */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:900px){ .grid-2{grid-template-columns:1fr} }
+    .feature{border:1px solid #e7eef7;background:#fff;border-radius:14px;padding:16px}
+    .feature h3{margin:0 0 6px}
+    .meter{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--lime) 25%,var(--teal) 55%,var(--navy) 100%);opacity:.95;margin-top:10px}
+
+    /* Solutions grid (cards like original) */
+    .solutions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:1100px){ .solutions{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:720px){ .solutions{grid-template-columns:1fr} }
+    .sol-card{background:#fff;border:1px solid #e7eef7;border-radius:14px;padding:16px}
+    .sol-card h3{margin:0 0 8px;font-size:18px}
+    .bullets{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+    .bullets li{position:relative;padding-left:18px}
+    .bullets li:before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(155,212,96,.25)}
+
+    /* Collaborators */
+    .partners{display:flex;gap:14px;flex-wrap:wrap}
+    .partner-pill{height:38px;width:140px;border-radius:10px;border:1px dashed #bcd3ea;background:#f2f7fb;color:#6b7a8e;display:flex;align-items:center;justify-content:center;font-size:12px}
+
+    /* Insights / blog */
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:900px){ .cards{grid-template-columns:1fr} }
+    .post{background:#fff;border:1px solid #e7eef7;border-radius:14px;padding:16px}
+    .post h3{margin:0 0 8px}
+    .link{display:inline-block;margin-top:10px;font-weight:800;border-bottom:2px solid rgba(14,32,59,.2)}
+
+    /* CTA band */
+    .cta-band{background:#e7f6ea;border:1px solid #cfe9d4;border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;background:linear-gradient(90deg,var(--lime),var(--teal));border:1px solid rgba(14,32,59,.12);color:#0e203b;font-weight:900}
+
+    /* Accordion / FAQ & Comparison (SEO add-ons) */
+    .faq{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+    .faq-item{border:1px solid #e7eef7;border-radius:12px;background:#fff}
+    .faq-q{width:100%;text-align:left;background:#fff;border:0;padding:14px 16px;font-weight:800;color:#0f1b2d;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+    .faq-q:focus{outline:3px solid var(--ring);outline-offset:2px}
+    .faq-a{padding:0 16px;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transition:max-height .3s,opacity .2s,visibility .3s step-end}
+    .faq-item[data-open="true"] .faq-a{padding:10px 16px 16px;max-height:260px;opacity:1;visibility:visible;transition:max-height .34s,opacity .22s,visibility 0s step-start}
+    .faq-a p{margin:0}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #e7eef7;border-radius:14px;overflow:hidden;background:#fff}
+    .table th,.table td{padding:14px;text-align:left;vertical-align:top}
+    .table thead th{background:#f5f8fc;color:#0f1b2d;font-size:14px;font-weight:800}
+    .table tbody tr+tr td{border-top:1px solid #edf2f7}
+    .chip{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(155,212,96,.18);color:#28421a}
+
+    /* Footer */
+    footer{background:#0f1f38;color:#d5e0f5;margin-top:28px;padding-top:6px}
+    .foot-top{padding:16px 0}
+    .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:18px}
+    @media (max-width:1000px){ .cols{grid-template-columns:1fr 1fr} }
+    @media (max-width:600px){ .cols{grid-template-columns:1fr} }
+    .cols h4{margin:0 0 8px;color:#fff}
+    .cols ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+    .cols a{color:#cfe3ff}
+    .foot-bottom{border-top:1px solid #294266;margin-top:16px;padding:12px 0;color:#9fb3d8;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap}
+  </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Header -->
-  <header role="banner">
-    <div class="container topbar" aria-label="Global header">
-      <a href="/"><img src="/assets/img/logo.svg" width="120" height="28" alt="Madiba logo"></a>
-      <nav aria-label="Primary">
-        <ul>
-          <li><a href="/services/s4hana.html">S/4HANA Migration</a></li>
-          <li><a href="/services/rise-grow.html">RISE &amp; GROW</a></li>
-          <li><a href="/services/analytics.html">Analytics</a></li>
-          <li><a href="/services/btp.html">SAP BTP</a></li>
-          <li><a href="/services/managed.html">Managed</a></li>
-          <li><a href="/insights/">Insights</a></li>
-          <li><a href="/contact/">Contact</a></li>
-          <li><a class="cta" href="/contact/">Book a 30-min Consult</a></li>
-        </ul>
+  <!-- Utility top bar -->
+  <div class="top">
+    <div class="wrap">
+      <span>Phone: +1 (949) 716-8979</span>
+      <span>•</span>
+      <a href="mailto:info@madiba.com">info@madiba.com</a>
+    </div>
+  </div>
+
+  <!-- Header / Nav -->
+  <header class="site">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-label="Madiba logo"></div>
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#services">Services</a>
+        <a href="#industries">Industries</a>
+        <a href="#about">About Us</a>
+        <a href="#support">Support</a>
+        <a href="#blog">More</a>
+        <a class="cta" href="#contact">Contact Us</a>
       </nav>
     </div>
   </header>
 
-  <main id="main">
-    <!-- Hero -->
-    <section class="hero" role="region" aria-label="Hero">
-      <div class="container hero-inner">
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div>
+        <h1>Meet Your Business Operational Goals With Advanced <span style="color:#9bd460">SAP</span> <span style="color:#64c7cf">Business AI Solutions</span></h1>
+        <p>Unlock next-gen SAP S/4 HANA solutions that streamline processes, enhance decision-making, and deliver real-time outcomes—so you stay competitive.</p>
+
+        <div class="tile-row">
+          <article class="tile">
+            <h3>Optimise Your Business Transformation</h3>
+            <p>Learn about **RISE** & **GROW** with SAP—subscription packages that simplify your move from **ECC → S/4 HANA**.</p>
+            <a class="link" href="#risegrow">Know more →</a>
+          </article>
+          <article class="tile">
+            <h3>Detailed Insights</h3>
+            <p>Put your SAP data to work with <strong>Madiba SNAP</strong>—real-time analytics with SAP Datasphere & Analytics Cloud.</p>
+            <a class="link" href="#snap">Know more →</a>
+          </article>
+          <article class="tile">
+            <h3>Financial Excellence</h3>
+            <p>Achieve clarity with <strong>Madiba FINEX</strong>—faster financial close, real-time reporting, and audit-ready controls.</p>
+            <a class="link" href="#finex">Know more →</a>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero-img" role="img" aria-label="Datacentre corridor illustrating cloud infrastructure"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="wrap about">
+      <div class="card">
+        <div class="kicker">Know About Madiba</div>
+        <h2 class="section-title">Leveraging the Power of <strong>SAP S/4 HANA</strong> For Your Business Growth</h2>
+        <p>Madiba is your trusted partner for end-to-end business transformation. From <strong>SAP S/4 HANA Cloud implementation</strong> to <strong>RISE/GROW with SAP</strong>, our consultants deliver faster time-to-value with measurable outcomes across <em>Finance, Healthcare, Public Sector, Retail, Media, and Energy</em>.</p>
+        <p>We blend deep business understanding with advanced SAP expertise, supported by proprietary accelerators—<strong>SNAP</strong>, <strong>FINEX</strong>, and <strong>ACTIVE</strong>—and a long-standing SAP partnership. Services include implementation, custom development, performance tuning, HA/DR, data & analytics, and SAP Business AI on BTP.</p>
+
+        <div class="stats" aria-label="Key delivery stats">
+          <div class="stat"><strong>1,500+</strong><span>Completed Projects</span></div>
+          <div class="stat"><strong>300+</strong><span>SAP Consultants</span></div>
+          <div class="stat"><strong>25+ years</strong><span>Experience</span></div>
+        </div>
+      </div>
+
+      <aside class="trust" aria-label="Logo trust band">
+        <div><strong>Trusted by Industry Leaders Worldwide</strong></div>
+        <div class="logo-row">
+          <div class="logo-pill">Allergan</div>
+          <div class="logo-pill">A+E Networks</div>
+          <div class="logo-pill">Duracell</div>
+          <div class="logo-pill">KARL STORZ</div>
+        </div>
+        <p class="disclaimer"><em>Important note:</em> Madiba is not associated with or sponsored by any of these registered or trademark owners.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- CTA quick -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
         <div>
-          <p class="kicker">SAP Digital Transformation</p>
-          <h1>Advance Your Business with <em>SAP S/4HANA</em>: Migration, RISE & Real-Time Analytics</h1>
-          <p class="lead">Move from legacy ERP to S/4HANA with less risk. We deliver Brownfield, Greenfield and Selective Data Transition programmes, build extensions on SAP BTP, and stand up executive-ready analytics with SAP Datasphere and SAP Analytics Cloud.</p>
-          <div class="actions">
-            <a class="btn primary magnetic" href="/services/s4hana.html">See Migration Approaches</a>
-            <a class="btn secondary magnetic" href="#readiness">Check Readiness in 2 mins</a>
-          </div>
-          <div class="pills" aria-label="Proof points">
-            <span class="pill">25+ years</span>
-            <span class="pill">24/7 support</span>
-            <span class="pill">US • UK • India</span>
-          </div>
+          <div class="kicker">Ready to Leverage SAP</div>
+          <h2 class="section-title">Transform Your Business with SAP S/4 HANA</h2>
         </div>
-        <div aria-hidden="true" class="reveal">
-          <img loading="lazy" width="560" height="360" src="/assets/img/placeholder-hero.svg" alt="Abstract illustration placeholder">
-        </div>
+        <a class="btn" href="#contact">Talk to SAP Experts</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="progressbar" aria-hidden="true"></div>
+  <!-- Public / Private feature cards -->
+  <section>
+    <div class="wrap grid-2">
+      <article class="feature">
+        <h3>Scalable Cloud Solutions</h3>
+        <p><strong>Accelerate Innovation with SAP S/4 HANA Public Cloud</strong></p>
+        <p>A perfect fit for organisations that want to minimise infrastructure overheads and scale on demand. Public Cloud lets you pay for what you need while adopting best-practice processes quickly.</p>
+        <div class="meter" aria-hidden="true"></div>
+      </article>
+      <article class="feature">
+        <h3>Customised Cloud Excellence</h3>
+        <p><strong>Future-Proof Your Enterprise with SAP S/4 HANA Private Cloud</strong></p>
+        <p>Choose Private Cloud when you need deeper control of processes, security, compliance, and complex integrations—without sacrificing agility.</p>
+        <div class="meter" aria-hidden="true"></div>
+      </article>
+    </div>
+  </section>
 
-    <!-- Migration Paths (card variations) -->
-    <section class="section">
-      <div class="container">
-        <h2>Choose the Right S/4HANA Migration Path</h2>
-        <div class="grid">
-          <!-- band-left + blue -->
-          <article class="card service band-left accent-blue reveal tilt">
-            <div class="tilt-shadow" aria-hidden="true"></div>
-            <h3>Brownfield Conversion (Keep Core, Modernise Fast)</h3>
-            <p>Convert ECC to S/4HANA with minimal disruption. Best when current processes are sound and you need speed. Includes custom code remediation, data migration, and Fiori enablement.</p>
-            <ul class="list">
-              <li>Typical timeline: 4–8 months</li>
-              <li>Low change adoption overhead</li>
-              <li>Lower cost vs Greenfield</li>
-            </ul>
-            <p class="cta-link"><a href="/services/s4hana.html">Book a Brownfield Discovery →</a></p>
-          </article>
+  <!-- Solutions grid -->
+  <section id="solutions">
+    <div class="wrap">
+      <div class="kicker">SAP Solutions We Can Help With</div>
+      <h2 class="section-title">Unlock Business Agility</h2>
 
-          <!-- band-top + green -->
-          <article class="card service band-top accent-green reveal tilt">
-            <div class="tilt-shadow" aria-hidden="true"></div>
-            <h3>Greenfield Implementation (Re-design for the Future)</h3>
-            <p>Stand up a clean S/4HANA system using SAP Best Practices. Ideal when re-engineering processes or consolidating multiple ERPs.</p>
-            <ul class="list">
-              <li>Typical timeline: 9–15 months</li>
-              <li>Maximum process innovation</li>
-              <li>Clean core for easy upgrades</li>
-            </ul>
-            <p class="cta-link"><a href="/services/s4hana.html">Discuss a Greenfield Blueprint →</a></p>
-          </article>
+      <div class="solutions">
+        <!-- S/4 HANA Cloud -->
+        <article class="sol-card">
+          <div class="kicker">Expertise-Driven Business Transformation</div>
+          <h3>SAP S/4 HANA Cloud</h3>
+          <ul class="bullets">
+            <li>Cloud Public Edition</li>
+            <li>Private Cloud Edition</li>
+            <li>RISE with SAP</li>
+            <li>GROW with SAP</li>
+            <li>SAP Roadmap & Signavio</li>
+            <li>SAP Cloud ALM</li>
+            <li>SAP S/4 HANA Conversion</li>
+            <li>Greenfield Implementation</li>
+            <li>For New Customers</li>
+            <li>ECC & SAP BW</li>
+            <li>Keep Core Clean</li>
+          </ul>
+        </article>
 
-          <!-- contrast header + icon -->
-          <article class="card service contrast with-icon reveal tilt">
-            <div class="tilt-shadow" aria-hidden="true"></div>
-            <div class="icon" aria-hidden="true">⚖️</div>
-            <h3>Selective Data Transition (Hybrid, Lower Risk)</h3>
-            <p>Migrate only what you need and redesign where it matters. Balance speed with process improvement; perfect for group consolidations.</p>
-            <ul class="list">
-              <li>Timeline: 6–12 months</li>
-              <li>Pick-and-choose org units & data ranges</li>
-              <li>Controlled risk & cost</li>
-            </ul>
-            <p class="cta-link"><a href="/services/s4hana.html">See SDT Scenarios →</a></p>
-          </article>
+        <!-- Technology -->
+        <article class="sol-card" id="services">
+          <div class="kicker">Next-Gen SAP Stack</div>
+          <h3>SAP Technology</h3>
+          <ul class="bullets">
+            <li>SAP BTP Overview</li>
+            <li>Data & Analytics</li>
+            <li>Application Development</li>
+            <li>Integration Suite</li>
+            <li>SAP AI / Business AI</li>
+            <li>SAP FIORI</li>
+            <li>SAP ABAP</li>
+          </ul>
+        </article>
 
-          <!-- outline (minimal) + ribbon -->
-          <article class="card service outline with-ribbon reveal tilt">
-            <div class="tilt-shadow" aria-hidden="true"></div>
-            <span class="ribbon">Cloud</span>
-            <h3>RISE & GROW with SAP (Public vs Private Cloud)</h3>
-            <p>Choose the right operating model—public for rapid time-to-value or private for advanced customisation. We manage subscription, SLAs, security and integration.</p>
-            <ul class="list">
-              <li>Decision matrix & TCO modelling</li>
-              <li>Security & compliance baked in</li>
-              <li>Run on hyperscalers incl. AWS</li>
-            </ul>
-            <p class="cta-link"><a href="/services/rise-grow.html">Compare RISE vs GROW →</a></p>
-          </article>
-        </div>
+        <!-- Data & Analytics -->
+        <article class="sol-card">
+          <div class="kicker">Leverage Enterprise Data</div>
+          <h3>SAP Data & Analytics</h3>
+          <ul class="bullets">
+            <li>SAP Analytics Cloud</li>
+            <li>SAP Datasphere</li>
+            <li>SAP MDG</li>
+            <li>Data Migration & Transformation (ECC → S/4)</li>
+            <li>SAP BPC & BW</li>
+            <li>Madiba SNAP</li>
+            <li>Madiba FINEX</li>
+            <li>Madiba ACTIVE</li>
+          </ul>
+        </article>
+
+        <!-- Cloud consulting -->
+        <article class="sol-card">
+          <div class="kicker">Cloud-First Approach</div>
+          <h3>Cloud Consulting</h3>
+          <ul class="bullets">
+            <li>Cloud Transition (TCO, roadmap, risk)</li>
+            <li>Cloud Transformation (fit-to-standard)</li>
+            <li>SAP on AWS (HA/DR, cost governance)</li>
+          </ul>
+        </article>
+
+        <!-- Talent -->
+        <article class="sol-card" id="industries">
+          <div class="kicker">Your Extended Team</div>
+          <h3>SAP Talent</h3>
+          <ul class="bullets">
+            <li>Public Sector Contracting</li>
+            <li>Contingent Staffing (FI/CO, MM, SD, PP, EWM, BW/4HANA, BTP)</li>
+            <li>Madiba Academy</li>
+          </ul>
+        </article>
+
+        <!-- Managed Services -->
+        <article class="sol-card">
+          <div class="kicker">Support, Scale & Succeed</div>
+          <h3>Managed Services</h3>
+          <ul class="bullets">
+            <li>SAP on AWS 24×7</li>
+            <li>Dedicated Managed Services</li>
+            <li>Shared Support Services</li>
+            <li>On-Demand Support</li>
+            <li>SLA-Backed Outcomes</li>
+          </ul>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Solutions Highlights -->
-    <section class="section">
-      <div class="container">
-        <h2>Accelerators That De-Risk Delivery</h2>
-        <div class="grid">
-          <!-- band-left teal -->
-          <article class="card service band-left accent-teal reveal tilt">
-            <div class="tilt-shadow"></div>
-            <img loading="lazy" width="540" height="180" src="/assets/img/placeholder-wide.svg" alt="ACTIVE accelerator placeholder">
-            <h3>Madiba ACTIVE</h3>
-            <p>Readiness & planning accelerator to profile custom code, data volume/quality, and UX. Clarifies scope, risks and roadmap fast.</p>
-            <p class="cta-link"><a href="/solutions/active.html">Explore ACTIVE →</a></p>
-          </article>
-
-          <!-- contrast + ribbon -->
-          <article class="card service contrast with-ribbon reveal tilt">
-            <div class="tilt-shadow"></div>
-            <span class="ribbon">Analytics</span>
-            <h3>Madiba SNAP</h3>
-            <p>Executive-ready analytics with SAP Datasphere & SAC. Governed data models, reusable dashboards, and a 90-day rollout plan.</p>
-            <p class="cta-link"><a href="/solutions/snap.html">Explore SNAP →</a></p>
-          </article>
-
-          <!-- band-top navy -->
-          <article class="card service band-top accent-navy reveal tilt">
-            <div class="tilt-shadow"></div>
-            <img loading="lazy" width="540" height="180" src="/assets/img/placeholder-wide.svg" alt="FINEX accelerator placeholder">
-            <h3>Madiba FINEX</h3>
-            <p>Financial operations on S/4HANA: faster close, reconciliations, and management reporting with automation and reusable assets.</p>
-            <p class="cta-link"><a href="/solutions/finex.html">Explore FINEX →</a></p>
-          </article>
-        </div>
+  <!-- Collaborating with Global Innovators -->
+  <section>
+    <div class="wrap">
+      <div class="kicker">Collaborating with Global Innovators</div>
+      <div class="card partners">
+        <div class="partner-pill">SAP</div>
+        <div class="partner-pill">UiPath</div>
+        <div class="partner-pill">AWS Partner Network</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Services Grid (variation mix) -->
-    <section class="section">
-      <div class="container">
-        <h2>SAP Solutions We Can Help With <span class="small">(<em>Unlock Business Agility</em>)</span></h2>
-        <div class="grid">
-          <article class="card service band-left accent-blue reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3>S/4HANA Cloud</h3>
-            <p>Public and Private editions including RISE &amp; GROW. Implement or convert with clean-core strategy.</p>
-            <p class="cta-link"><a href="/services/s4hana.html">View S/4HANA Services →</a></p>
-          </article>
-
-          <article class="card service outline no-bar reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3>SAP Technology</h3>
-            <p>Fiori, ABAP Cloud, Integration Suite and automation on SAP BTP, with upgrade-safe extensions.</p>
-            <p class="cta-link"><a href="/services/btp.html">Explore SAP BTP →</a></p>
-          </article>
-
-          <article class="card service band-top accent-green reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3>Data &amp; Analytics</h3>
-            <p>Datasphere & SAC dashboards, governed data models and finance/operations analytics you can trust.</p>
-            <p class="cta-link"><a href="/services/analytics.html">Analytics Services →</a></p>
-          </article>
-
-          <article class="card service contrast with-icon reveal tilt">
-            <div class="tilt-shadow"></div>
-            <div class="icon" aria-hidden="true">☁️</div>
-            <h3>Cloud Consulting</h3>
-            <p>Cloud transition & transformation roadmaps, security and cost optimisation across hyperscalers.</p>
-            <p class="cta-link"><a href="/services/managed.html">See Cloud Ops →</a></p>
-          </article>
-
-          <article class="card service band-left accent-lime reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3>SAP Talent</h3>
-            <p>Specialist SAP resources and project teams to accelerate programmes without compromising quality.</p>
-            <p class="cta-link"><a href="/contact/">Request SAP Talent →</a></p>
-          </article>
-
-          <article class="card service band-top accent-teal reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3>Managed Services</h3>
-            <p>24/7 operations, patching, SLAs and runbooks. HA/DR, FinOps and cost control on AWS and more.</p>
-            <p class="cta-link"><a href="/services/managed.html">Managed SAP on AWS →</a></p>
-          </article>
-        </div>
+  <!-- Insights -->
+  <section id="blog">
+    <div class="wrap">
+      <div class="kicker">Get Industry Insights</div>
+      <h2 class="section-title">In Real-Time</h2>
+      <div class="cards">
+        <article class="post">
+          <div class="kicker">Blog</div>
+          <h3>S/4 HANA Conversion – Key Areas</h3>
+          <p><strong>Current System Landscape and Components:</strong> assess current system status, components, versions, and support packs before planning migration…</p>
+          <a class="link" href="#read1">Read more</a>
+        </article>
+        <article class="post">
+          <div class="kicker">Technology</div>
+          <h3>What is SAP S/4 HANA? A Basic Introduction.</h3>
+          <p>Growth is the primary objective of every business—achieved by improving operations and decision-making. Data…</p>
+          <a class="link" href="#read2">Read more</a>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Credibility: KPIs + Logos -->
-    <section class="section logos" role="region" aria-label="Client credibility">
-      <div class="container">
-        <div class="grid">
-          <div class="card ghost reveal" style="grid-column: span 12;">
-            <div style="display:flex; gap:30px; flex-wrap:wrap; align-items:center;">
-              <div><strong data-animate-number data-end="250">0</strong>+ Delivered Projects</div>
-              <div><strong data-animate-number data-end="120">0</strong>+ SAP Consultants</div>
-              <div><strong data-animate-number data-end="25">0</strong>+ Years of Excellence</div>
+  <!-- SEO Boosters (FAQ + Comparison) -->
+  <section>
+    <div class="wrap">
+      <div class="kicker">FAQs</div>
+      <h2 class="section-title">SAP S/4 HANA Migration – Common Questions</h2>
+      <div class="card">
+        <ul class="faq" id="faq">
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a1">How long does migration from ECC to S/4 HANA take?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </button>
+            <div class="faq-a" id="a1">
+              <p>Mid-market programmes typically run <strong>6–12 months</strong>; enterprise migrations are phased over <strong>12–24+ months</strong> depending on data, integrations, geographies, and change/training needs.</p>
             </div>
-          </div>
-        </div>
-        <div class="logo-row" aria-label="Trusted by industry leaders">
-          <img src="/assets/img/placeholder-logo-1.svg" width="120" height="28" alt="Client Logo 1">
-          <img src="/assets/img/placeholder-logo-2.svg" width="120" height="28" alt="Client Logo 2">
-          <img src="/assets/img/placeholder-logo-3.svg" width="120" height="28" alt="Client Logo 3">
-          <img src="/assets/img/placeholder-logo-4.svg" width="120" height="28" alt="Client Logo 4">
-        </div>
-      </div>
-    </section>
-
-    <!-- Readiness Form (unchanged structure; styled by CSS) -->
-    <section class="section" id="readiness">
-      <div class="container">
-        <h2>S/4HANA Readiness Score (Self-Assessment)</h2>
-
-        <form id="readiness-form" class="card reveal" netlify>
-          <p><strong>Answer briefly</strong> to get a directional recommendation.</p>
-          <div class="hr" aria-hidden="true"></div>
-          <div class="progressline"><span></span></div>
-
-          <!-- Q1 -->
-          <div class="field full-span">
-            <label for="q1a">Current process health?</label>
-            <div class="choice-group" role="radiogroup">
-              <label class="choice">
-                <input id="q1a" type="radio" name="q1" value="2" required>
-                <span><strong>Mostly standardised</strong><span class="sub">Stable, well-documented processes</span></span>
-              </label>
-              <label class="choice">
-                <input id="q1b" type="radio" name="q1" value="5">
-                <span><strong>Needs redesign</strong><span class="sub">Significant variance or pain points</span></span>
-              </label>
+          </li>
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a2">What’s the difference between RISE and GROW with SAP?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </button>
+            <div class="faq-a" id="a2">
+              <p><strong>RISE</strong> targets established SAP customers consolidating to cloud with one contract; <strong>GROW</strong> suits new/smaller footprints starting greenfield with prescriptive scope.</p>
             </div>
-          </div>
-
-          <!-- Q2 -->
-          <div class="field full-span">
-            <label for="q2a">Custom code usage?</label>
-            <div class="choice-group" role="radiogroup">
-              <label class="choice">
-                <input id="q2a" type="radio" name="q2" value="2" required>
-                <span><strong>Light</strong><span class="sub">Few Z* objects; limited enhancements</span></span>
-              </label>
-              <label class="choice">
-                <input id="q2b" type="radio" name="q2" value="5">
-                <span><strong>Heavy / complex</strong><span class="sub">Many Z* objects; deep customisations</span></span>
-              </label>
+          </li>
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a3">Public vs Private Cloud — how do I choose?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </button>
+            <div class="faq-a" id="a3">
+              <p><strong>Public</strong> = faster value, standardised processes, SaaS economics. <strong>Private</strong> = greater control, customisation, and complex/regulatory integrations.</p>
             </div>
-          </div>
-
-          <!-- Q3 -->
-          <div class="field full-span">
-            <label for="q3a">Number of ERPs / instances?</label>
-            <div class="choice-group" role="radiogroup">
-              <label class="choice">
-                <input id="q3a" type="radio" name="q3" value="2" required>
-                <span><strong>Single / simple</strong><span class="sub">One system; limited complexity</span></span>
-              </label>
-              <label class="choice">
-                <input id="q3b" type="radio" name="q3" value="5">
-                <span><strong>Multiple / consolidation</strong><span class="sub">Several ERPs; merger or carve-out</span></span>
-              </label>
+          </li>
+          <li class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false" aria-controls="a4">What drives migration cost the most?
+              <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </button>
+            <div class="faq-a" id="a4">
+              <p>Data volume/quality, custom-code remediation, number of integrations, multi-country rollout, non-functional requirements, and change & training effort.</p>
             </div>
-          </div>
-
-          <!-- Q4 -->
-          <div class="field full-span">
-            <label for="q4a">Change appetite?</label>
-            <div class="choice-group" role="radiogroup">
-              <label class="choice">
-                <input id="q4a" type="radio" name="q4" value="2" required>
-                <span><strong>Low</strong><span class="sub">Prefer minimal change</span></span>
-              </label>
-              <label class="choice">
-                <input id="q4b" type="radio" name="q4" value="5">
-                <span><strong>High</strong><span class="sub">Open to redesigning processes</span></span>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-actions">
-            <button class="btn primary magnetic" type="submit">Calculate</button>
-          </div>
-
-          <div id="readiness-output" class="notice" style="margin-top:12px;" aria-live="polite"></div>
-        </form>
+          </li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Insights -->
-    <section class="section">
-      <div class="container">
-        <h2>Insights & Resources</h2>
-        <div class="grid">
-          <article class="card post band-left accent-blue reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3><a href="/insights/">S/4HANA Migration Timeline: Brownfield vs Greenfield vs SDT</a></h3>
-            <p>We compare timelines, dependencies and resourcing to help you choose the right path.</p>
-            <p class="cta-link"><a href="/services/s4hana.html">Link to S/4HANA services →</a></p>
-          </article>
-          <article class="card post outline no-bar reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3><a href="/insights/">RISE vs GROW vs Private Cloud: Which Model Fits?</a></h3>
-            <p>Decision matrix with TCO, customisation, upgrade cadence and compliance considerations.</p>
-            <p class="cta-link"><a href="/services/rise-grow.html">See RISE &amp; GROW services →</a></p>
-          </article>
-          <article class="card post band-top accent-green reveal tilt">
-            <div class="tilt-shadow"></div>
-            <h3><a href="/insights/">Datasphere vs BW/4HANA: Modernising Analytics</a></h3>
-            <p>What changes when you move to Datasphere and SAC.</p>
-            <p class="cta-link"><a href="/services/analytics.html">Explore Analytics →</a></p>
-          </article>
-          <article class="card post contrast with-ribbon reveal tilt">
-            <div class="tilt-shadow"></div>
-            <span class="ribbon">Case Study</span>
-            <h3><a href="/insights/">Rapid Brownfield with ACTIVE Readiness</a></h3>
-            <p>How a global brand moved to S/4HANA faster with lower risk.</p>
-            <p class="cta-link"><a href="/solutions/active.html">ACTIVE details →</a></p>
-          </article>
-        </div>
+  <section>
+    <div class="wrap">
+      <div class="kicker">Comparison</div>
+      <h2 class="section-title">S/4 HANA Options Compared</h2>
+      <div class="card">
+        <table class="table" aria-describedby="compnote">
+          <thead>
+            <tr><th>Option</th><th>Best For</th><th>Strengths</th><th>Considerations</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="chip">Public Edition</span></td>
+              <td>Standardised processes; faster time-to-value</td>
+              <td>SaaS model, rapid deployment, predictable TCO</td>
+              <td>Less customisation; adopt fit-to-standard</td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:rgba(100,199,207,.2);color:#0e3b42">Private Edition</span></td>
+              <td>Complex/regulatory use cases; legacy integrations</td>
+              <td>Greater control, extensibility, integration depth</td>
+              <td>Higher ownership effort vs Public</td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:rgba(155,212,96,.2)">RISE with SAP</span></td>
+              <td>Existing SAP customers moving to cloud</td>
+              <td>Single contract & SLA; bundled infra + software</td>
+              <td>Scope/guardrails defined by subscription</td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:rgba(100,199,207,.2);color:#0e3b42">GROW with SAP</span></td>
+              <td>Net-new or smaller SAP footprints</td>
+              <td>Prescriptive, quicker start; scale as you grow</td>
+              <td>Best for greenfield scenarios</td>
+            </tr>
+          </tbody>
+        </table>
+        <p id="compnote" class="disclaimer" style="color:#52627a">Dense, scannable context designed for search intent pages; keep in DOM for SEO.</p>
       </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="section">
-      <div class="container">
-        <div class="cta-bar reveal" role="region" aria-label="Contact CTA">
-          <div>
-            <strong>Looking for expert help?</strong><br>
-            Book a 30-minute consultation with an S/4HANA architect.
-          </div>
-          <a class="btn magnetic" href="/contact/">Book a 30-min Consult</a>
-        </div>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer role="contentinfo">
-    <div class="container foot-grid">
-      <section class="foot-col">
-        <h3>Madiba</h3>
-        <p>Digital transformation with SAP S/4HANA, SAP BTP and real-time analytics. Global delivery from the US, UK and India.</p>
-      </section>
-      <nav class="foot-col" aria-label="Quick Links">
-        <h3>Quick Links</h3>
-        <ul class="list">
-          <li><a href="/about/">About</a></li>
-          <li><a href="/insights/">Insights</a></li>
-          <li><a href="/contact/">Contact</a></li>
-          <li><a href="/services/s4hana.html">S/4HANA Migration</a></li>
-          <li><a href="/services/rise-grow.html">RISE &amp; GROW</a></li>
-        </ul>
-      </nav>
-      <nav class="foot-col" aria-label="Prime Services">
-        <h3>Prime Services</h3>
-        <ul class="list">
-          <li><a href="/services/s4hana.html">S/4HANA Migration</a></li>
-          <li><a href="/services/rise-grow.html">RISE &amp; GROW with SAP</a></li>
-          <li><a href="/services/analytics.html">Datasphere &amp; SAC Analytics</a></li>
-          <li><a href="/services/btp.html">SAP BTP Extensions</a></li>
-          <li><a href="/services/managed.html">Managed SAP on AWS</a></li>
-        </ul>
-      </nav>
+  <footer id="contact">
+    <div class="wrap foot-top">
+      <div class="cta-band" style="background:#e6f6cf;border-color:#cfe9d4">
+        <div>
+          <div class="kicker">Looking for Expert Help?</div>
+          <h2 class="section-title" style="margin:0">Speak with our SAP consultants today</h2>
+        </div>
+        <a class="btn" href="mailto:info@madiba.com">Get in Touch →</a>
+      </div>
     </div>
-    <div class="container">
-      <p class="copyright">© <script>document.write(new Date().getFullYear())</script> Madiba. All rights reserved.</p>
+
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <h4>Madiba Inc.</h4>
+          <p>Fuelled by the core principles of <em>Innovation, Agility & Experience</em>, we aim to make SAP solutions accessible for businesses of all sizes.</p>
+          <p>LinkedIn • YouTube</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#partners">Partnerships</a></li>
+            <li><a href="#careers">Work With Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Prime Services</h4>
+          <ul>
+            <li>Cloud Public Edition</li>
+            <li>Private Cloud Edition</li>
+            <li>Madiba SNAP</li>
+            <li>Madiba FINEX</li>
+            <li>Madiba ACTIVE</li>
+            <li>SAP Roadmap</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Info</h4>
+          <ul>
+            <li>Phone: +1 (949) 716-8979</li>
+            <li>Email: info@madiba.com</li>
+            <li>Fax: +1 (949) 271-4073</li>
+            <li>16481 Scientific, Irvine, CA 92618 USA</li>
+            <li>T&C • Cookies • Privacy & Policy</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <span>© Madiba — All rights reserved 2025</span>
+        <span>Site by Madiba</span>
+      </div>
     </div>
   </footer>
+
+  <script>
+    // FAQ toggles (content stays in DOM; visibility toggled)
+    document.querySelectorAll('.faq-item').forEach((it, i)=>{
+      const q = it.querySelector('.faq-q');
+      const a = it.querySelector('.faq-a');
+      const id = a.id || `a${i+1}`;
+      a.id = id; q.setAttribute('aria-controls', id);
+      q.addEventListener('click', ()=>{
+        const open = it.getAttribute('data-open') === 'true';
+        it.setAttribute('data-open', String(!open));
+        q.setAttribute('aria-expanded', String(!open));
+      });
+    });
+  </script>
 </body>
 </html>
